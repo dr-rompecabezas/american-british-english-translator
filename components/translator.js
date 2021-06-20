@@ -60,7 +60,7 @@ class Translator {
     for (const key in britishOnly) {
       if (Object.hasOwnProperty.call(britishOnly, key)) {
         const value = britishOnly[key];
-        const regex = new RegExp(`([^-])(\\b${key}\\b)`, 'i');
+        const regex = new RegExp(`([^-]|^)(\\b${key}\\b)`, 'i');
         if (regex.test(translation)) {
           translation = translation.replace(regex, `<span class=\"highlight\">$1${value}</span>`)
         }
