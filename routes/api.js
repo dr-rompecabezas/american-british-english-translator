@@ -9,11 +9,12 @@ module.exports = function (app) {
   app.route('/api/translate')
     .post((req, res) => {
 
-      if (req.body.text.length === 0) {
+      // console.log(req.method, req.path, req.ip, req.body)
+      
+      if (req.body.text === '') {
         res.json({ error: 'No text to translate' })
         return
-      }
-      if (!req.body.text || !req.body.locale) {
+      } else if (!req.body.text || !req.body.locale) {
         res.json({ error: 'Required field(s) missing' })
         return
       }
@@ -28,10 +29,11 @@ module.exports = function (app) {
         translation = translator.translateBritishToAmerican(text)
       } else {
         res.json({ error: 'Invalid value for locale field' })
+        return
       }
       
       if (text === translation) {
-        res.json({translation: 'Everything looks good to me!'})
+        res.json({text, translation: 'Everything looks good to me!'})
       } else {
         res.json({text, translation})
       }
