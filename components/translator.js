@@ -18,9 +18,6 @@ const britishOnly = require('./british-only.js')
 // Wrap any translated spelling or terms with 
 // <span class="highlight">...</span> tags
 
-// If text requires no translation, 
-// return "Everything looks good to me!" 
-// for the translation value.
 
 class Translator {
 
