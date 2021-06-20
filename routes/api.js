@@ -9,35 +9,32 @@ module.exports = function (app) {
   app.route('/api/translate')
     .post((req, res) => {
 
-      if (!req.body.text || !req.body.locale) {
-        res.json({ error: 'Required field(s) missing' })
-        return
-      }
       if (req.body.text.length === 0) {
         res.json({ error: 'No text to translate' })
         return
       }
-      if (req.body.locale !== 'american-to-british' || req.body.locale !== 'british-to-american') {
-        res.json({ error: 'Invalid value for locale field' })
+      if (!req.body.text || !req.body.locale) {
+        res.json({ error: 'Required field(s) missing' })
         return
       }
 
-      // Sample Request:
-      // {
-      // 	"text": "We watched the footie match for a while.",
-      // 	"locale": "british-to-american"
-      // }
+      const text = req.body.text
+      const locale = req.body.locale
+      let translation;
 
-      // Sample Response:
-      // {
-      //   "text": "We watched the footie match for a while.",
-      //   "translation": "We watched the <span class=\"highlight\">soccer</span> match for a while."
-      // }
-
-      // If text requires no translation, 
-      // return "Everything looks good to me!" 
-      // for the translation value.
-      // Check if text === translation
+      if (locale === 'american-to-british') {
+        translation = translator.translateAmericanToBritish(text)
+      } else if (locale === 'british-to-american') {
+        translation = translator.translateBritishToAmerican(text)
+      } else {
+        res.json({ error: 'Invalid value for locale field' })
+      }
+      
+      if (text === translation) {
+        res.json({translation: 'Everything looks good to me!'})
+      } else {
+        res.json({text, translation})
+      }
 
     });
 };
