@@ -1,2 +1,2 @@
 # [Quality Assurance Projects - American / British Translator](https://www.freecodecamp.org/learn/quality-assurance/quality-assurance-projects/american-british-translator)
-See live demo at [Replit](https://american-british-english-translator.drrompecabezas.repl.co/)
+See live [Repl](https://american-british-english-translator.drrompecabezas.repl.co/)
